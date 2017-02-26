@@ -1,0 +1,71 @@
+{# this is some other template that you want to display #}
+{% extends "top250\base.html" %}
+{% block content %}
+<div class="jumbotron">
+  <h2 class="sub-header" style="color: #FCA205; font-family: 'Lobster';">My IMDB Top 250 Tracker</h1>
+
+  <small><b>Source:</b> <a href="http://www.imdb.com/chart/top" target="_blank">http://www.imdb.com/chart/top</a></small>
+  &nbsp;&nbsp;<small><b>Resolution:</b> <a href="/top250/">ALL</a> - <a href="/top250/filter/360p">360p</a> - <a href="/top250/filter/480p">480p</a> - <a href="/top250/filter/576p">576p</a> - <a href="/top250/filter/None">None</a></small>
+  <p/>
+
+  <div class="table-responsive">
+    <table class="table table-striped" style="font-size: 13px;">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Rank and Title</th>
+          <th>Rating</th>
+          <th>Casting</th>
+          <th>Runtime</th>
+          <th>Format</th>
+          <th>Resolution</th>
+          <th>Rank Date&nbsp;</th>
+        </tr>
+      </thead>
+      <tbody>
+      
+        {% if top_250_list %}
+            {% for m in top_250_list %}
+                <tr>
+                  <td style="vertical-align: middle;"><img src="{{ m.poster }}"/></td>
+                  <td style="vertical-align: middle;" width="480">
+                    {% if m.rank == 299 %} EX-{{ m.last_rank }} {% else %} {{ m.rank }} {% endif %}. 
+                    <a href="/top250/{{ m.imdb_id }}/">{{ m.title }}</a> ({{ m.year }})
+                  &nbsp;&nbsp;<a href="/admin/top250/movie/{{ m.id }}/change/" target="_blank">{% load static %}<img src="{% static "edit.png" %}" /></a>
+                  <a href="http://www.imdb.com/title/tt{{ m.imdb_id }}" target="_blank">{% load static %}<img src="{% static "imdb.png" %}" /></a></td>
+                  <td style="vertical-align: middle;" align="center">{{ m.rating }}</td>
+                  <td style="vertical-align: middle;">{{ m.casting }}</td>
+                  <td style="vertical-align: middle;">{{ m.runtime }}</td>
+                  <td style="vertical-align: middle;">
+                    {% if m.video_format %}
+                        {{ m.video_format }}
+                    {% else %}
+                        <font color="red" style="background-color: yellow;"><b>{{ m.video_format }}</b></font>
+                    {% endif %}
+                    </td>
+                  <td style="vertical-align: middle;">
+                    {% if m.resolution != "1080p" and m.resolution != "720p" %}
+                        <font color="black" style="background-color: palegreen;">{{ m.resolution }}</font>
+                    {% elif m.resolution %}
+                        {{ m.resolution }}
+                    {% else %}
+                        <font color="red" style="background-color: yellow;"><b>{{ m.resolution }}</b></font>
+                    {% endif %}
+                  </td>
+                  <td style="vertical-align: middle;">{{ m.last_pub_date | date:'Y-m-d' }}</td>
+                </tr>
+            {% endfor %}
+        {% else %}
+            <tr><td colspan="100%">No movies are available.</td></tr>
+        {% endif %}
+      
+
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+{% endblock %}
+
+

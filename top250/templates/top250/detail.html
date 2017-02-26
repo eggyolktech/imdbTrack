@@ -1,0 +1,33 @@
+{# this is some other template that you want to display #}
+{% extends "top250\base.html" %}
+{% block content %}
+<div class="jumbotron">
+
+    <h2 class="sub-header" style="color: #FCA205; font-family: 'Lobster';">&nbsp;&nbsp;{{ movie_data.Title }} ({{ movie_data.Year}})</h1>
+
+    <div class="row" style="font-size: 14px;">
+        <div class="col-md-3" align="right"><img src="{{ movie_data.Poster}}"/></div>
+        <div class="col-md-9" style="padding: 0;">
+            <p style=" font-family: 'Droid Serif'; padding: 10px; font-size: 15px;">{{ movie_data.Plot }}</p>
+            <table class="table" style="font-size: 15px;">
+                <tbody>
+                <!--{"Title":"12 Angry Men","Year":"1957","Rated":"APPROVED","Released":"01 Apr 1957","Runtime":"96 min","Genre":"Crime, Drama","Director":"Sidney Lumet","Writer":"Reginald Rose (story), Reginald Rose (screenplay)","Actors":"Martin Balsam, John Fiedler, Lee J. Cobb, E.G. Marshall","Plot":"The defense and the prosecution have rested and the jury is filing into the jury room to decide if a young man is guilty or innocent of murdering his father. What begins as an open-and-shut case of murder soon becomes a detective story that presents a succession of clues creating doubt, and a mini-drama of each of the jurors' prejudices and preconceptions about the trial, the accused, and each other. Based on the play, all of the action takes place on the stage of the jury room.","Language":"English","Country":"USA","Awards":"Nominated for 3 Oscars. Another 16 wins & 8 nominations.","Poster":"http://ia.media-imdb.com/images/M/MV5BODQwOTc5MDM2N15BMl5BanBnXkFtZTcwODQxNTEzNA@@._V1_SX300.jpg","Metascore":"N/A","imdbRating":"8.9","imdbVotes":"451,535","imdbID":"tt0050083","Type":"movie","Response":"True"}-->
+                    <tr><th>Director</th><td>{{ movie_data.Director }}</td></tr>
+                    <tr><th>Writer</th><td>{{ movie_data.Writer }}</td></tr>
+                    <tr><th>Actors</th><td>{{ movie_data.Actors }}</td></tr>
+                    <tr><th>Runtime</th><td>{{ movie_data.Runtime }}</td></tr>
+                    <tr><th>Genre</th><td>{{ movie_data.Genre }}</td></tr>
+                    <tr><th>Language</th><td>{{ movie_data.Language }}</td></tr>
+                    <tr><th>Country</th><td>{{ movie_data.Country }}</td></tr>
+                    <tr><th>Rating</th><td>{{ movie_data.imdbRating }}</td></tr>
+                    <tr><th>Votes</th><td>{{ movie_data.imdbVotes }}</td></tr>
+					<tr><th>Douban</th><td><a href="{{ douban_data.mobile_link }}" target="_blank">{{ douban_data.alt_title }}</a></td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+

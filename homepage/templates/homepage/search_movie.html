@@ -1,0 +1,33 @@
+{# this is some other template that you want to display #}
+{% extends "homepage\base.html" %}
+{% block content %}
+
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+    <div class="jumbotron">
+      <div class="container">
+        <h4>Search results for "{{ form.search_movie.value }}"</h4>
+        <br/>
+        {% if iList %}
+            {% for m in iList %}
+                IMDB Top {{m.rank}} - {{ m.title }} ({{ m.year}})<br/>
+            {% endfor %}
+        {% endif %}
+        
+         {% if dList %}
+            {% for m in dList %}
+                Douban Top {{m.rank}} - {{ m.original_title }} ({{ m.year}})<br/>
+            {% endfor %}
+        {% endif %}
+        
+        {% if tList %}
+            {% for m in tList %}
+                Rotten Tomatoes Top  {{m.rank}} - {{ m.title }} ({{ m.year}})<br/>
+            {% endfor %}
+        {% endif %}
+        
+      </div>
+    </div>
+
+{% endblock %}
+
+

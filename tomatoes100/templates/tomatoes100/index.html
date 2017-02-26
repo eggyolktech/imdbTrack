@@ -1,0 +1,78 @@
+{# this is some other template that you want to display #}
+{% extends "tomatoes100\base.html" %}
+{% block content %}
+<div class="jumbotron">
+  <h2 class="sub-header" style="color: #FCA205; font-family: 'Lobster';">Rotten Tomatoes Best 100 Tracker</h1>
+
+  <small><b>Source:</b> <a href="https://www.rottentomatoes.com/top/bestofrt/" target="_blank">https://www.rottentomatoes.com/top/bestofrt/</a></small>
+  &nbsp;&nbsp;<small><b>Resolution:</b> <a href="/tomatoes100/">ALL</a> - <a href="/tomatoes100/filter/360p">360p</a> - <a href="/tomatoes100/filter/480p">480p</a> - <a href="/tomatoes100/filter/576p">576p</a> - <a href="/tomatoes100/filter/None">None</a></small>
+  <p/>
+
+  <div class="table-responsive">
+    <table class="table table-striped" style="font-size: 15px;">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Rank and Title</th>
+          <th>Tomatometer</th>
+          <th>Rating</th>
+          <th>Review</th>
+          <th>Format</th>
+          <th>Resolution</th>
+          <th>Rank Date&nbsp;</th>
+        </tr>
+      </thead>
+      <tbody>
+      
+        {% if top_100_list %}
+            {% for m in top_100_list %}
+                <tr>
+                  <td style="vertical-align: middle;" width="70"><img src="{{ m.poster }}" width="100"/></td>
+                  <td style="vertical-align: middle;">
+                    {% if m.rank == 299 %} EX-{{ m.last_rank }} {% else %} {{ m.rank }} {% endif %}. 
+                    <a href="https://www.rottentomatoes.com/m/{{ m.tomato_id }}/" target="_blank">{{ m.title }}</a> ({{ m.year }})
+                  &nbsp;&nbsp;<a href="/admin/tomatoes100/movie/{{ m.id }}/change/" target="_blank">{% load static %}<img src="{% static "edit.png" %}" /></a> {% if m.is_imdb_250 == 'Y' %} <img src="{% static "imdb.png" %}" /> {% endif %}
+                  {% if m.is_douban_250 == 'Y' %} <img src="{% static "icon_douban.png" %}" /> {% endif %}
+                  </td>
+                  </td>
+                  <td style="vertical-align: middle;" align="center">
+                    {% if m.tomatometer == "certified" %}
+                        {% load static %}<img width="64" src="{% static "certified_fresh.gif" %}" />
+                    {% else %}
+                        {% load static %}<img width="64" src="{% static "fresh.ico" %}" />
+                    {% endif %}
+                  </td>
+                  <td style="vertical-align: middle;" align="center">{{ m.rating }}</td>
+                  <td style="vertical-align: middle;">{{ m.review }}</td>
+                  <td style="vertical-align: middle;">
+                    {% if m.video_format %}
+                        {{ m.video_format }}
+                    {% else %}
+                        <font color="red" style="background-color: yellow;"><b>{{ m.video_format }}</b></font>
+                    {% endif %}
+                    </td>
+                  <td style="vertical-align: middle;">
+                    {% if m.resolution != "1080p" and m.resolution != "720p" %}
+                        <font color="black" style="background-color: palegreen;">{{ m.resolution }}</font>
+                    {% elif m.resolution %}
+                        {{ m.resolution }}
+                    {% else %}
+                        <font color="red" style="background-color: yellow;"><b>{{ m.resolution }}</b></font>
+                    {% endif %}
+                  </td>
+                  <td style="vertical-align: middle;">{{ m.last_pub_date | date:'Y-m-d' }}</td>
+                </tr>
+            {% endfor %}
+        {% else %}
+            <tr><td colspan="100%">No movies are available.</td></tr>
+        {% endif %}
+      
+
+      </tbody>
+    </table>
+  </div>
+</div>
+
+{% endblock %}
+
+

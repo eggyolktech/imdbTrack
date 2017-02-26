@@ -1,0 +1,44 @@
+{# this is some other template that you want to display #}
+{% extends "homepage\base.html" %}
+{% block content %}
+
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+    <div class="jumbotron">
+      <div class="container">
+        <h1>Here you go!</h1>
+        <p>Winston's Top Movies Tracker is a tool to record and keep track of the top movies inventories from serveral professional Internet Movies Database. Top movies are being tracked daily and more functions will be added from time to time.</p>
+        <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>
+      </div>
+    </div>
+
+    <div class="container">
+      <!-- Example row of columns -->
+      <div class="row">
+        <div class="col-md-4">
+          <!--h2>Heading</h2-->
+          <a href="/top250">{% load static %}<img src="{% static "imdb_wide.png" %}" height="120" width="320" /></a><p/>
+          <p>Check out the top 250 movies as rated by IMDb users. The list only includes theatrical features.</p>
+          <p><a class="btn btn-default" href="/top250" role="button">View details &raquo;</a></p>
+        </div>
+        <div class="col-md-4">
+          <a href="/douban250">{% load static %}<img src="{% static "douban_wide.jpg" %}" height="120" /></a><p/>
+          <p>豆瓣根据每部影片看过的人数以及该影片所得的评价等综合数据，通过算法分析产生豆瓣电影250。</p>
+          <p><a class="btn btn-default" href="/douban250" role="button">View details &raquo;</a></p>
+       </div>
+        <div class="col-md-4">
+          <a href="/tomatoes100">{% load static %}<img src="{% static "tomato_wide.png" %}" height="120" /></a><p/>
+          <p>Tomatometer rankings of the top 100 best movies of 2016 and all time. </p>
+          <p><a class="btn btn-default" href="/tomatoes100" role="button">View details &raquo;</a></p>
+        </div>
+      </div>
+
+      <hr>
+
+      <footer>
+        <p>&copy; 2016 Winston Yip</p>
+      </footer>
+    </div> <!-- /container -->
+
+{% endblock %}
+
+

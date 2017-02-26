@@ -1,0 +1,46 @@
+{# this is some other template that you want to display #}
+{% extends "douban250\base.html" %}
+{% block content %}
+<div class="jumbotron">
+
+    <h2 class="sub-header" style="color: #FCA205; font-family: 'Lobster';">&nbsp;&nbsp;{{ douban_data.title }} ({{ douban_data.year}})</h1>
+
+    <div class="row" style="font-size: 14px;">
+        <div class="col-md-3" align="right" width="200" style="vertical-align: middle">
+            <img src="{{ douban_data.images.large}}"/></div>
+        <div class="col-md-9" style="padding: 0;">
+            <p style=" font-family: 'Droid Serif'; padding: 12px; font-size: 17px;">{{ douban_data.summary }}</p>
+            <table class="table" style="font-size: 14px;">
+                <tbody>
+                    <tr><th width="70">導演</th><td>{{ douban_data.directors.0.name }}</td></tr>
+                    <tr><th>演員</th><td>
+                        {% for cast in douban_data.casts %}
+                            {{ cast.name }}&nbsp;
+                        {% endfor %}
+                    </td></tr>
+                    <tr><th>地區</th><td>
+                        {% for country in douban_data.countries %}
+                            {{ country }}&nbsp;
+                        {% endfor %}
+                    </td></tr>
+                    <tr><th>類型</th><td>
+                         {% for genre in douban_data.genres %}
+                            {{ genre }}&nbsp;
+                        {% endfor %}
+                    </td></tr>
+                    <tr><th>又名</th><td>
+                        {% for name in douban_data.aka %}
+                            {{ name }}&nbsp;-&nbsp;
+                        {% endfor %}
+                    </td></tr>
+                    <tr><th>豆瓣</th><td><a href="{{ douban_data.alt}}" target="_blank">{{ douban_data.alt}}</a></td></tr>
+                    <tr><th>評分</th><td>{{ douban_data.rating.average }}</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+
