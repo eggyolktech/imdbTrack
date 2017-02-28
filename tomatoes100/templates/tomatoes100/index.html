@@ -27,7 +27,7 @@
         {% if top_100_list %}
             {% for m in top_100_list %}
                 <tr>
-                  <td style="vertical-align: middle;" width="70"><img src="{{ m.poster }}" width="100"/></td>
+                  <td style="vertical-align: middle;" width="70"><img src="{{ m.poster }}" width="100"/><a name="{{ m.tomato_id }}"></a></td>
                   <td style="vertical-align: middle;">
                     {% if m.rank == 299 %} EX-{{ m.last_rank }} {% else %} {{ m.rank }} {% endif %}. 
                     <a href="https://www.rottentomatoes.com/m/{{ m.tomato_id }}/" target="_blank">{{ m.title }}</a> ({{ m.year }})

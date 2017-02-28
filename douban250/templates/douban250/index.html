@@ -27,7 +27,7 @@
         {% if top_250_list %}
             {% for m in top_250_list %}
                 <tr>
-                  <td style="vertical-align: middle;" width="70"><img src="{{ m.poster }}"/></td>
+                  <td style="vertical-align: middle;" width="70"><img src="{{ m.poster }}"/><a name="{{ m.douban_id }}"></a></td>
                   <td style="vertical-align: middle;">
                     {% if m.rank == 299 %} EX-{{ m.last_rank }} {% else %} {{ m.rank }} {% endif %}. 
                     <a href="/douban250/{{ m.douban_id }}/">{{ m.title }}</a> ({{ m.year }})

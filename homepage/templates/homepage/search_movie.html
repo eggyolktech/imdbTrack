@@ -9,19 +9,19 @@
         <br/>
         {% if iList %}
             {% for m in iList %}
-                IMDB Top {{m.rank}} - {{ m.title }} ({{ m.year}})<br/>
+                IMDB Top {{m.rank}} - <a href="/top250/#{{ m.imdb_id }}">{{ m.title }} ({{ m.year}})</a><br/>
             {% endfor %}
         {% endif %}
         
          {% if dList %}
             {% for m in dList %}
-                Douban Top {{m.rank}} - {{ m.original_title }} ({{ m.year}})<br/>
+                Douban Top {{m.rank}} - <a href="/douban250/#{{ m.douban_id }}">{{ m.original_title }} ({{ m.year}})</a><br/>
             {% endfor %}
         {% endif %}
         
         {% if tList %}
             {% for m in tList %}
-                Rotten Tomatoes Top  {{m.rank}} - {{ m.title }} ({{ m.year}})<br/>
+                Rotten Tomatoes Top  {{m.rank}} - <a href="/tomatoes100/#{{ m.tomato_id }}">{{ m.title }} ({{ m.year}})</a><br/>
             {% endfor %}
         {% endif %}
         
