@@ -6,24 +6,52 @@
     <div class="jumbotron">
       <div class="container">
         <h4>Search results for "{{ form.search_movie.value }}"</h4>
+        
+          <div class="table-responsive">
+            <table class="table table-striped" style="font-size: 15px;">
+              <thead>
+                <tr>
+                    <th></th>
+                    <th>Rank</th>
+                    <th>Title</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% if iList %}
+                    {% for m in iList %}
+                        <tr>
+                            <td width="100">{% load static %}<img src="{% static "imdb_wide.png" %}" height="30" /></td>
+                            <td>{{m.rank}}</td>
+                            <td><a href="/top250/#{{ m.imdb_id }}" target="_blank">{{ m.title }} ({{ m.year}})</a></td>
+                        </tr>
+                    {% endfor %}
+                {% endif %}
+             
+                {% if dList %}
+                    {% for m in dList %}
+                        <tr>
+                            <td width="100">{% load static %}<img src="{% static "douban_wide.jpg" %}" height="30" /></td>
+                            <td>{{m.rank}}</td>
+                            <td><a href="/douban250/#{{ m.douban_id }}" target="_blank">{{ m.original_title }} ({{ m.year}})</a></td>
+                        </tr>
+                    {% endfor %}
+                {% endif %}
+
+                {% if tList %}
+                    {% for m in tList %}
+                        <tr>
+                            <td width="100">{% load static %}<img src="{% static "tomato_wide.png" %}" height="30" /></td>
+                            <td>{{m.rank}}</td>
+                            <td><a href="/tomatoes100/#{{ m.tomato_id }}" target="_blank">{{ m.title }} ({{ m.year}})</a></td>
+                        </tr>
+                    {% endfor %}
+                {% endif %}
+                
+              </tbody> 
+            </table>
+          </div>
+          
         <br/>
-        {% if iList %}
-            {% for m in iList %}
-                IMDB Top {{m.rank}} - {{ m.title }} ({{ m.year}})<br/>
-            {% endfor %}
-        {% endif %}
-        
-         {% if dList %}
-            {% for m in dList %}
-                Douban Top {{m.rank}} - {{ m.original_title }} ({{ m.year}})<br/>
-            {% endfor %}
-        {% endif %}
-        
-        {% if tList %}
-            {% for m in tList %}
-                Rotten Tomatoes Top  {{m.rank}} - {{ m.title }} ({{ m.year}})<br/>
-            {% endfor %}
-        {% endif %}
         
       </div>
     </div>
