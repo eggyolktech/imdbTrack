@@ -77,8 +77,25 @@ def sync_top100_by_soup():
             m = Movie(tomato_id=str(_tomatoid), title=_title.encode("utf-8"), year=_year, 
             rank=_rank, last_pub_date=timezone.now(), rating=_rating, tomatometer=_tomatometer, review=_review, poster=_poster )
             m.save()                          
+    
+    # Update poster for previous top movies
+    for mov in Movie.objects.filter(rank=299):
+    
+        _poster = ""
 
-# sync top 100 list
+        try:
+            _poster = get_poster_detail(mov.tomato_id)
+        except Exception as e:
+            _poster = ""
+            
+        if _poster:
+            print("---- update existing record with poster")
+            
+            # movies exists, updated new rank here
+            mov.poster=_poster
+            
+        mov.save()
+    
 
 def get_poster_detail(tomato_id):
 
